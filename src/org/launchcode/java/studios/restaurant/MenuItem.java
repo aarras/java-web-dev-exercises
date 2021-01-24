@@ -1,12 +1,15 @@
 package org.launchcode.java.studios.restaurant;
 
+import java.util.Date;
+import java.util.Objects;
+
 public class MenuItem {
 
-    private String name;
-    private String description;
-    private String category;
-    private float price;
-    private boolean isNew;
+    protected String name;
+    protected String description;
+    protected String category;
+    protected float price;
+    protected boolean isNew;
 
     public MenuItem(String name, String description, String category, float price) {
         this.name = name;
@@ -14,6 +17,19 @@ public class MenuItem {
         this.category = category;
         this.price = price;
         this.isNew = true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MenuItem menuItem = (MenuItem) o;
+        return Float.compare(menuItem.price, price) == 0 && name.equals(menuItem.name) && category.equals(menuItem.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, category, price);
     }
 
     //getters and setters
@@ -57,6 +73,8 @@ public class MenuItem {
         this.isNew = aIsNew;
     }
 
-    MenuItem pizza = new MenuItem("Pizza", "It's pizza...", "Main", 9);
+    public boolean checkIfNew() {
+        return this.isNew;
+    }
 
 }
